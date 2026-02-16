@@ -26,3 +26,8 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest -v
+        
+      - name: Run linter
+        run: |
+          pip install flake8
+          flake8 . --max-line-length=88 --max-complexity=5
