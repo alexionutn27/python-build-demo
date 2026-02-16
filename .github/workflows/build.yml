@@ -1,9 +1,7 @@
-name: Build & Test Python App
+name: Create project archive
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -13,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -28,13 +24,11 @@ jobs:
 
       - name: Run tests and generate JUnit report
         run: |
-          PYTHONPATH=. python -m pytest --junitxml=pytest.xml
+         python -m zipfile -c build.zip main.py utils.py tests
 
-      - name: Upload test report as artifact
+
+      - name: Upload project archive
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-report
-          path: pytest.xml
-
-      - name: Run app
-        run: python main.py
+          name: project-zip
+          path: build.zip
