@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.014" timestamp="2026-02-16T23:01:49.369673+02:00" hostname="Axi"><testcase classname="tests.test_utils" name="test_calculate_total" time="0.000" /></testsuite></testsuites>
