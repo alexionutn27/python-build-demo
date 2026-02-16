@@ -22,13 +22,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests and generate JUnit report
+      - name: Run tests and save log
         run: |
-         python -m zipfile -c build.zip main.py utils.py tests
+          PYTHONPATH=. python -m pytest -v --junitxml=pytest.xml | tee pytest.log
 
-
-      - name: Upload project archive
+      - name: Upload JUnit report
         uses: actions/upload-artifact@v4
         with:
-          name: project-zip
-          path: build.zip
+          name: junit-report
+          path: pytest.xml
+
+      - name: Upload test log
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-log
+          path: pytest.log
